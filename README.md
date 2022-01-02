@@ -16,7 +16,7 @@ More details in the [Slides](https://hackmd.io/@TTW/ToC-2019-Project#) and [FAQ]
 ### Prerequisite
 * Python 3.6
 * Pipenv
-* Facebook Page and App
+* Facebook Page and Ap
 * HTTPS Server
 
 #### Install Dependency

@@ -14,7 +14,7 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "state1", "state2"],
+    states=["user", "state1", "state2","state3"],
     transitions=[
         {
             "trigger": "advance",
@@ -28,7 +28,13 @@ machine = TocMachine(
             "dest": "state2",
             "conditions": "is_going_to_state2",
         },
-        {"trigger": "go_back", "source": ["state1", "state2"], "dest": "user"},
+        {
+            "trigger": "advance",
+            "source": "user",
+            "dest": "state3",
+            "conditions": "is_going_to_state3",
+        },
+        {"trigger": "go_back", "source": ["state1", "state2","state3"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,
@@ -50,6 +56,7 @@ if channel_access_token is None:
 
 line_bot_api = LineBotApi(channel_access_token)
 parser = WebhookParser(channel_secret)
+machine.get_graph().draw("fsm.png", prog="dot", format="png")
 
 
 @app.route("/callback", methods=["POST"])
